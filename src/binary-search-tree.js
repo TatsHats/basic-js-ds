@@ -54,8 +54,6 @@ class BinarySearchTree {
 
   // вспом. ф. найти значение
   search (node, data) {
-    const direction = data < node.data ? 'left' : 'right';
-
     if (node === null) {
       return null; // если узла нет вернем null
     }
@@ -64,6 +62,7 @@ class BinarySearchTree {
       return node; // если узел найден вернем его
     }
 
+    const direction = data < node.data ? 'left' : 'right';
     return this.search(node[direction], data); // если не нашли ищем рекурсивно дальше в нужном направлении
   }
 
@@ -71,19 +70,47 @@ class BinarySearchTree {
     return this.search(this.rootTree, data);
   }
 
-  remove(/* data */) {
-    throw new NotImplementedError('Not implemented');
-    // remove line with error and write your code here
+  remove(data) {
+    /*
+    if (this.rootTree === null) {
+      return null;
+    }
+
+    let currentNode = this.rootTree; // начинаем с корня поиск нужного для удаления эл.
+
+    while (currentNode !== null) {
+      // если текущ. узел больше - влево, меньше - вправо
+      if (data < currentNode.data) {
+        currentNode = currentNode.left;
+      } else if (data > currentNode.data) {
+        currentNode = currentNode.right;
+      } else {
+
+      }
+    }
+
+    return currentNode;
+    */
   }
 
   min() {
-    throw new NotImplementedError('Not implemented');
-    // remove line with error and write your code here
+    // как мин значение ищем самый левый узел
+    let currentNode = this.rootTree;
+
+    while (currentNode && currentNode.left !== null) {
+      currentNode = currentNode.left;
+    }
+    return currentNode ? currentNode.data : null; // null вернем если дерево пустое
   }
 
   max() {
-    throw new NotImplementedError('Not implemented');
-    // remove line with error and write your code here
+    // ищем по правым узлам до крайнего справа (макс. значение)
+    let currentNode = this.rootTree;
+
+    while (currentNode && currentNode.right !== null) {
+      currentNode = currentNode.right;
+    }
+    return currentNode ? currentNode.data : null; // null вернем если дерево пустое
   }
 }
 
